@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style type="text/css">
+        html {
+            font-size: 20px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #102770;
+            background-color: #ffeba7;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 200ms linear;
+        }
+
+        .link {
+            color: #ffeba7;
+            padding: 10px 20px;
+            display: inline-block;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #102770;
+        }
+
+        .link:hover {
+            color: #102770;
+            background-color: #ffeba7;
+            text-decoration: none;
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            display: block;
+        }
+
+        .full-height {
+            min-height: 100vh;
+        }
+
+        [type="checkbox"]:checked,
+        [type="checkbox"]:not(:checked) {
+            position: absolute;
+            left: -99999px;
+        }
+
+        .pricing:checked+label,
+        .pricing:not(:checked)+label {
+            position: relative;
+            display: block;
+            /* text-align: center; */
+            width: 260px;
+            height: 44px;
+            border-radius: 4px;
+            padding: 0 25px;
+            margin: 0 auto;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            line-height: 44px;
+            cursor: pointer;
+            overflow: hidden;
+            color: #91dac1;
+            text-align: left;
+        }
+
+        .pricing:checked+label::before,
+        .pricing:not(:checked)+label::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            background-color: #09057f;
+            width: 100%;
+            height: 100%;
+            display: block;
+            z-index: -2;
+        }
+
+        .pricing:checked+label::after,
+        .pricing:not(:checked)+label::after {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            background-color: #ffeba7;
+            content: "";
+            display: block;
+            border-radius: 2px;
+            z-index: -1;
+            width: 128px;
+            height: 40px;
+            transition: all 300ms linear;
+        }
+
+        .pricing:checked+label::after {
+            left: 130px;
+        }
+
+        .block-diff {
+            display: block;
+        }
+
+        .card-3d-wrap {
+            position: relative;
+            width: 340px;
+            max-width: calc(100% - 20px);
+            height: 510px;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            margin-top: 90px;
+        }
+
+        .card-3d-wrapper {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform-style: preserve-3d;
+            transition: all 700ms 400ms ease-out;
+        }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 5px;
+            backface-visibility: hidden;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+            transform-style: preserve-3d;
+        }
+        .card-back{
+            transform:rotateY(180deg);
+            
+        }
+        .card-back .link{background-color: #0c1c00;}
+        .card-back .link:hover{background-color: #ffeba7;color: #0c1c00;}
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper{
+            transform: rotateY(180deg);
+        }
+        .pricing-wrap {
+            position: relative;
+            padding-top: 160px;
+            width: 100%;
+            display: block;
+            z-index: 1;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+        }
+
+        .pricing-wrap h4 {
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-size: 22px;
+            color: #102770;
+            position: relative;
+            width: 100%;
+            display: block;
+            text-align: center;transform: translate3d(0,0,35px) perspective(100px);
+        }
+        .pricing-wrap h4::before{
+            content: "";
+            position: absolute;
+            background: linear-gradient(217deg, #448ad5,#b8eaf9);
+            width: 70px;
+            height: 70px;
+            display: block;
+            top: 50%;left: 50%;
+            transform: translate(-50%,-50%);
+            box-shadow: 0 6px 20px rgba(16, 39, 112, 0.3);
+            animation: border-transform  6s linear infinite;
+            z-index: -1;
+        }
+        @keyframes border-transform {
+            0%,100%{border-radius: 63% 37% 54% 46%;}
+            14%{border-radius: 40% 60% 54% 46%;}
+            28%{border-radius: 54% 46% 38% 62%;}
+            42%{border-radius: 61% 39% 55% 45%;}
+            56%{border-radius: 61% 39% 67% 33%;}
+            70%{border-radius: 50% 50% 34% 66%;}
+            84%{border-radius: 61% 39% 55% 45%;}
+        }
+        .card-back .pricing-wrap h4::before{
+            background: linear-gradient(217deg, rgb(3, 72, 3) , #a3c948);}
+        .pricing-wrap h2 {
+            position: relative;
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-weight: 400;
+            font-size: 36px;
+            line-height: 1.1;
+            color: #102770;
+        }
+
+        .pricing-wrap h2 sup {
+            font-size: 20px;
+        }
+
+        .pricing-wrap p {
+            position: relative;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 1px;
+            color: #102770;
+        }
+
+        .img-wrap img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .img-1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .img-2 {
+            position: absolute;
+            display: block;
+            left: -160px;
+            top: -50px;
+            width: calc(80% + 160px);
+            opacity: 1;
+            transform: translate3d(0px, 0px, 45px) perspective(100px);
+            pointer-events: auto;
+            transition: all 400ms ease 1200ms;
+        }
+
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-2 {
+            opacity: 0;
+            transform: translate3d(-50px, 25px, 45px) perspective(100px);
+            pointer-events: none;
+            transition:transform 400ms ease, opacity 200ms 150ms ease;
+        }
+
+        .img-3 {
+            position: absolute;
+            display: block;
+            right: -20px;
+            top: -40px;
+            width: calc(60% + 20px);
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate3d(0,0,50px)perspective(100px) scale(1);
+            transition: transform 400ms 1300ms ease, opacity 200ms 1300ms ease;
+        }
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-3{
+            opacity: 0;
+            transform: translate3d(-50px,5px,55px)perspective(100px) scale(0.4);
+            pointer-events: none;
+            transition:transform 400ms ease, opacity 200ms 150ms ease;
+        }
+
+        .img-4 {
+            position: absolute;
+            display: block;
+            right: -20px;
+            bottom: -50px;
+            width: calc(20% + 30px);
+            opacity: 1;
+            transform: translate3d(0,0,25px)perspective(100px) scale(1);
+            pointer-events: auto;
+            transition: transform 400ms 1300ms ease, opacity 200ms 1300ms ease;
+        }
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-4{
+            opacity: 0;
+            transform: translate3d(0px,0px,25px)perspective(100px) scale(0.4);
+            pointer-events: none;
+            transition:transform 400ms ease, opacity 200ms 150ms ease;
+        }
+        .img-5{
+            position: absolute;
+            display: block;
+            left: -60px;top: -60px;
+            width: calc(65% + 60px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate3d(0,0,45px) perspective(100px) scale(0.5);
+            transition:transform 400ms ease, opacity 200ms 150ms ease;
+        }
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-5{
+            opacity: 1;
+            transform: translate3d(0px,0px,45px)perspective(100px) scale(1);
+            pointer-events: auto;
+            transition: transform 400ms 1200ms ,opacity 300ms 1200ms ease ;
+        }
+        .img-6{
+            position: absolute;
+            display: block;
+            right: -70px;top: -50px;
+            width: calc(60% + 70px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate3d(0,0,35px) perspective(100px)  rotate(0deg) scale(0.5);
+            transition:transform 400ms 100ms ease, opacity 200ms 200ms ease;
+        }
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-6{
+            opacity: 1;
+            transform: translate3d(0px,0px,35px)perspective(100px) rotate(10deg) scale(1);
+            pointer-events: auto;
+            transition: transform 400ms 1300ms ,opacity 300ms 1300ms ease ;
+        }
+        .img-7{
+            position: absolute;
+            display: block;
+            right: -30px;bottom: -60px;
+            width: calc(25% + 30px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translate3d(0,0,35px) perspective(100px) scale(0.5);
+            transition:transform 400ms 100ms ease, opacity 200ms 200ms ease;
+        }
+        .pricing:checked ~ .card-3d-wrap .card-3d-wrapper .img-7{
+            opacity: 1;
+            transform: translate3d(0px,0px,35px)perspective(100px) scale(1);
+            pointer-events: auto;
+            transition: transform 400ms 1300ms ,opacity 300ms 1300ms ease ;
+        }
+    </style>
+    <script lang="java">
+
+    </script>
+</head>
+
+<body>
+    <div class="section over-hide">
+        <div class="container">
+            <div class="row justify-content-center full-height">
+                <div class="col-12 text-center py-5 align-self-center">
+                    <div class="section text-center py-5 ">
+                        <input type="checkbox" id="pricing" class="pricing" name="pricing">
+                        <label for="pricing">
+                            <span class="block-diff">Kayaking
+                                <span class="float-right">Camping</span>
+                            </span>
+                        </label><!-- procing -->
+                        <div class="card-3d-wrap mx-auto">
+
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="pricing-wrap">
+                                        <h4 class="mb-5">Kayaking</h4>
+                                        <h2 class="mb1"><sup>$</sup>39/4<sup>hrs</sup></h2>
+                                        <p class="mb-4">per person</p>
+                                        <p class="mb-4">Drina, Serbia</p>
+                                        <a href="#" class="link">Choose Date</a>
+
+                                        <div class="img-wrap img-1">
+                                            <img src="img/sea.webp" alt="sea">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-2">
+                                            <img src="img/kayak.webp" alt="kayak">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-3">
+                                            <img src="img/water.webp" alt="water">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-4">
+                                            <img src="img/Stone.webp" alt="Stone">
+                                        </div><!-- img-wrap -->
+
+                                    </div><!-- pricing-wrap -->
+                                </div><!-- card-front -->
+                                <div class="card-back">
+                                    <div class="pricing-wrap">
+                                        <h4 class="mb-5">Camping</h4>
+                                        <h2 class="mb1"><sup>$</sup>29/8<sup>hrs</sup></h2>
+                                        <p class="mb-4">per person</p>
+                                        <p class="mb-4">Tara, Serbia</p>
+                                        <a href="#" class="link">Choose Date</a>
+
+                                        <div class="img-wrap img-1">
+                                            <img src="img/grass.webp" alt="grass">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-5">
+                                            <img src="img/camp.webp" alt="camp">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-6">
+                                            <img src="img/Ivy.webp" alt="Ivy">
+                                        </div><!-- img-wrap -->
+
+                                        <div class="img-wrap img-7">
+                                            <img src="img/IvyRock.webp" alt="IvyRock">
+                                        </div><!-- img-wrap -->
+
+                                    </div><!-- pricing-wrap -->
+                                </div><!-- card-back -->
+
+                            </div><!-- card-3d-wrapper -->
+                        </div><!-- card-3d-wrap mx-auto-->
+                    </div><!-- section -->
+                </div><!-- col-12 -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- section over-hide -->
+</body>
+
+</html>
