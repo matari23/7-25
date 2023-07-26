@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=., initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <style type="text/css">
+
+    *{margin: 0;padding: 0;}
+    li{list-style: none;}
+    a{text-decoration: none; color: inherit;}
+    html,body{height: 100vh;width: 100%;}
+    body{font-family: 'Alfa Slab One', cursive; 
+        background-image: linear-gradient(45deg, #02001f, #1f1b4e);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+        perspective: 60rem;
+        }
+    .menu{}
+    .menu_list{
+        font-size: 4.25rem;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* transform: rotateX(-10deg) rotateY(20deg); */
+    }
+    .menu_list_item{
+        position: relative;
+        color: transparent;
+        cursor: pointer;
+        transition: all 0.8s;
+    }
+    .menu_list_item::before{
+        content: "";
+        display: block;
+        height: 4px;
+        background-color: rgb(242, 39, 151);
+        position: absolute;
+        top: 49%;left: -10px;right: -10px;
+        margin-top: -2px;
+        transform: scale(0);
+        z-index: 1;
+        transition: all 0.8s;
+    }
+    .mask{
+        display: block;
+        position: absolute;
+        height: 49%;
+        overflow: hidden;
+        top: 0;
+        color: #ff2c75;
+        transition: all 0.8s;
+    }
+    .mask span{
+        display: block;
+    }
+    .mask + .mask{
+        top: 48.9%;
+        height: 51.1%;
+    }
+    .mask + .mask span{
+        transform: translateY(-49%);
+    }
+    .menu_list_item:hover .mask ,
+    .menu_list_item:active .mask{
+        color: #fff;
+        transform: skewX(12deg) translateX(5px);
+        transition: all 0.8s;
+    }
+    .menu_list_item:hover  + .mask,
+    .menu_list_item:active  + .mask{
+        transform: skewX(12deg) translateX(-5px);
+    }
+    .menu_list_item:hover::before ,
+    .menu_list_item:active::before {
+        transform: scale(1);
+    }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <ul class="menu_list">
+
+            <li class="menu_list_item">Home
+                <span class="mask"><span>Home</span></span>
+                <span class="mask"><span>Home</span></span>
+            </li><!-- menu_list_item -->
+
+            <li class="menu_list_item">About
+                <span class="mask"><span>About</span></span>
+                <span class="mask"><span>About</span></span>
+            </li><!-- menu_list_item -->
+            
+
+            <li class="menu_list_item">Work
+                <span class="mask"><span>Work</span></span>
+                <span class="mask"><span>Work</span></span>
+            </li><!-- menu_list_item -->
+
+            <li class="menu_list_item">Contact
+                <span class="mask"><span>Contact</span></span>
+                <span class="mask"><span>Contact</span></span>
+            </li><!-- menu_list_item -->
+
+        </ul><!-- menu_list -->
+    </div><!-- menu -->
+</body>
+</html>
